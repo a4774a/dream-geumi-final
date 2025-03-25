@@ -26,17 +26,43 @@
       margin: 1rem auto;
     }
   
-    /* ✅ 여기 추가 */
-    .result p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-      color: #333;
-      white-space: pre-wrap;
+    /* ✅ 여기에 아래 CSS 추가하세요! */
+  
+    .result-box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 1rem;
     }
   
-    .result strong {
-      color: #007acc;
+    .share-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+  
+    .share-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    .share-buttons button:hover {
+      background-color: #388e3c;
+    }
+  
+    @media (max-width: 600px) {
+      form, .result-box {
+        padding: 1rem;
+        margin: 0.5rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -55,16 +81,17 @@
     <p>{{ dream }}</p>
 
     <!-- 🧠 꿈해몽 결과 출력 부분 -->
-<div class="result">
-    <h3>💡 꿈해몽 결과</h3>
-    {% if result %}
-      {% for paragraph in result.split('\n\n') %}
-        <p>{{ paragraph }}</p>
-      {% endfor %}
-    {% endif %}
-  </div>
-  
-  {% endif %}
+    <div class="result-box">
+        <h2>📌 꿈해몽 결과</h2>
+        <p>{{ result }}</p>
+
+        <!-- ✅ 공유 버튼 -->
+        <div class="share-buttons">
+            <button onclick="copyResult()">📋 복사하기</button>
+            <button onclick="shareLink()">🔗 링크 공유</button>
+        </div>
+    </div>
+{% endif %}
 
 </body>
 </html>
