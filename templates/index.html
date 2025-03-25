@@ -11,13 +11,13 @@
       padding: 1rem;
       background-color: #f9f9f9;
     }
-
+  
     h1 {
       font-size: 1.8rem;
       text-align: center;
       color: #222;
     }
-
+  
     form {
       display: flex;
       flex-direction: column;
@@ -25,56 +25,18 @@
       max-width: 600px;
       margin: 1rem auto;
     }
-
-    textarea {
-      width: 100%;
-      height: 120px;
-      font-size: 1rem;
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      resize: vertical;
+  
+    /* ✅ 여기 추가 */
+    .result p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      color: #333;
+      white-space: pre-wrap;
     }
-
-    button {
-      background-color: #007BFF;
-      color: white;
-      font-size: 1rem;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .result-box {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    .section-title {
-      font-weight: bold;
-      margin-top: 1rem;
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-      textarea {
-        font-size: 0.95rem;
-      }
-      button {
-        font-size: 0.95rem;
-      }
+  
+    .result strong {
+      color: #007acc;
     }
   </style>
 </head>
@@ -92,9 +54,16 @@
     <div class="section-title">🔍 당신이 입력한 꿈</div>
     <p>{{ dream }}</p>
 
-    <div class="section-title">💡 꿈해몽 결과</div>
-    <p>{{ result }}</p>
+    <!-- 🧠 꿈해몽 결과 출력 부분 -->
+<div class="result">
+    <h3>💡 꿈해몽 결과</h3>
+    {% if result %}
+      {% for paragraph in result.split('\n\n') %}
+        <p>{{ paragraph }}</p>
+      {% endfor %}
+    {% endif %}
   </div>
+  
   {% endif %}
 
 </body>
