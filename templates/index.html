@@ -1,26 +1,101 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>꿈해몽 by 금이</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>꿈해몽 by 금이</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      color: #222;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 600px;
+      margin: 1rem auto;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 1rem;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      font-size: 1rem;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result-box {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      textarea {
+        font-size: 0.95rem;
+      }
+      button {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>💤 꿈해몽 by 금이</h1>
-    <form method="post" action="/interpret">
-        <textarea name="dream" rows="5" cols="50" placeholder="당신의 꿈을 적어주세요...">{{ dream or "" }}</textarea><br>
-        <button type="submit">🔍 꿈 해석해줘!</button>
-    </form>
 
-    {% if dream %}
-        <hr>
-        <h2>🔎 당신이 입력한 꿈</h2>
-        <p>{{ dream }}</p>
-    {% endif %}
+  <h1>😴 꿈해몽 by 금이</h1>
 
-    {% if result %}
-        <hr>
-        <h2>✨ 꿈해몽 결과</h2>
-        <p>{{ result }}</p>
-    {% endif %}
+  <form method="post" action="/interpret">
+    <textarea name="dream" placeholder="예: 뱀이 나오는 꿈, 시험에 떨어지는 꿈 등"></textarea>
+    <button type="submit">🔍 꿈 해석해줘!</button>
+  </form>
+
+  {% if dream %}
+  <div class="result-box">
+    <div class="section-title">🔍 당신이 입력한 꿈</div>
+    <p>{{ dream }}</p>
+
+    <div class="section-title">💡 꿈해몽 결과</div>
+    <p>{{ result }}</p>
+  </div>
+  {% endif %}
+
 </body>
 </html>
