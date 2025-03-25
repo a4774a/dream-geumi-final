@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>꿈해몽 by 금이</title>
+</head>
+<body>
+    <h1>💤 꿈해몽 by 금이</h1>
+    <form method="post" action="/interpret">
+        <textarea name="dream" rows="5" cols="50" placeholder="당신의 꿈을 적어주세요...">{{ dream or "" }}</textarea><br>
+        <button type="submit">🔍 꿈 해석해줘!</button>
+    </form>
+
+    {% if dream %}
+        <hr>
+        <h2>🔎 당신이 입력한 꿈</h2>
+        <p>{{ dream }}</p>
+    {% endif %}
+
+    {% if result %}
+        <hr>
+        <h2>✨ 꿈해몽 결과</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
