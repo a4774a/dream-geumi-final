@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-openai
 python-multipart
 python-dotenv
 jinja2
+openai==1.13.3
