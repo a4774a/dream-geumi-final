@@ -92,6 +92,21 @@
         </div>
     </div>
 {% endif %}
-
+<script>
+    function copyResult() {
+      const text = document.querySelector('.result-box').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ 해몽 결과가 복사되었습니다!");
+      });
+    }
+  
+    function shareLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("🔗 링크가 복사되었습니다!");
+      });
+    }
+  </script>
+  
 </body>
 </html>
