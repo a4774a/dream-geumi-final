@@ -11,13 +11,13 @@
       padding: 1rem;
       background-color: #f9f9f9;
     }
-  
+
     h1 {
       font-size: 1.8rem;
       text-align: center;
       color: #222;
     }
-  
+
     form {
       display: flex;
       flex-direction: column;
@@ -25,43 +25,70 @@
       max-width: 600px;
       margin: 1rem auto;
     }
-  
-    /* ✅ 여기에 아래 CSS 추가하세요! */
-  
-    .result-box {
-      background-color: white;
-      border-radius: 10px;
+
+    textarea {
       padding: 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      margin-top: 1rem;
+      font-size: 1rem;
+      resize: vertical;
     }
-  
-    .share-buttons {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-  
-    .share-buttons button {
-      padding: 0.5rem 1rem;
-      border: none;
+
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
       background-color: #4CAF50;
       color: white;
+      border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-  
-    .share-buttons button:hover {
+
+    button:hover {
       background-color: #388e3c;
     }
-  
+
+    .result-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    #dreamResultText {
+      line-height: 1.6;
+      margin-top: 1rem;
+      white-space: pre-line;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .share-buttons button {
+      background-color: #2196F3;
+    }
+
+    .share-buttons button:hover {
+      background-color: #1976D2;
+    }
+
     @media (max-width: 600px) {
-      form, .result-box {
-        padding: 1rem;
-        margin: 0.5rem;
-      }
       h1 {
         font-size: 1.4rem;
+      }
+
+      form, .result-container {
+        padding: 1rem;
+        margin: 1rem;
       }
     }
   </style>
@@ -71,35 +98,33 @@
   <h1>😴 꿈해몽 by 금이</h1>
 
   <form method="post" action="/interpret">
-    <textarea name="dream" placeholder="예: 뱀이 나오는 꿈, 시험에 떨어지는 꿈 등"></textarea>
+    <textarea name="dream" rows="4" placeholder="예: 뱀이 나오는 꿈, 시험에 떨어지는 꿈 등"></textarea>
     <button type="submit">🔍 꿈 해석해줘!</button>
   </form>
 
   {% if dream %}
-  <div class="result-box">
-    <div class="section-title">🔍 당신이 입력한 꿈</div>
+  <div class="result-container">
+    <div class="section-title">🔎 당신이 입력한 꿈</div>
     <p>{{ dream }}</p>
 
-    <!-- 🧠 꿈해몽 결과 출력 부분 -->
-    <div class="result-box">
-        <h2>📌 꿈해몽 결과</h2>
-        <p>{{ result }}</p>
+    <div class="section-title">📌 꿈해몽 결과</div>
+    <p id="dreamResultText">{{ result }}</p>
 
-        <!-- ✅ 공유 버튼 -->
-        <div class="share-buttons">
-            <button onclick="copyResult()">📋 복사하기</button>
-            <button onclick="shareLink()">🔗 링크 공유</button>
-        </div>
+    <div class="share-buttons">
+      <button onclick="copyResult()">📋 복사하기</button>
+      <button onclick="shareLink()">🔗 링크 공유</button>
     </div>
-{% endif %}
-<script>
+  </div>
+  {% endif %}
+
+  <script>
     function copyResult() {
-      const text = document.querySelector('.result-box').innerText;
+      const text = document.getElementById('dreamResultText').innerText;
       navigator.clipboard.writeText(text).then(() => {
         alert("✅ 해몽 결과가 복사되었습니다!");
       });
     }
-  
+
     function shareLink() {
       const url = window.location.href;
       navigator.clipboard.writeText(url).then(() => {
@@ -107,6 +132,6 @@
       });
     }
   </script>
-  
+
 </body>
 </html>
